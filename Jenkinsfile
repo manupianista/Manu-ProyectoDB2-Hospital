@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any  
      stages {  
     stage('SCM Checkout'){
@@ -23,9 +23,9 @@ pipeline{
      
     stage('Compile-Package'){
         //obtener el maven
-        
-         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
         steps{
+         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
+        
         sh "${mvnHome}/bin/mvn package"
         }
     }
@@ -50,20 +50,5 @@ pipeline{
 
      }
      
-    /*
-    agent any
     
-    stages {
-        stage('Ok') {
-            steps {
-                echo "Ok"
-            }
-        }
-    }
-    post {
-        always {
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        }
-    }
-*/
 }
