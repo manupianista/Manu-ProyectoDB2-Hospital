@@ -7,9 +7,7 @@ node{
        
         sh 'git fetch --all'
         sh 'git checkout master'
-        sh 'git fetch'
-        sh 'git checkout Production'
-        sh 'git merge master'           
+        sh 'git fetch'           
         sh 'git checkout manu'
         sh 'git merge master'
     }
