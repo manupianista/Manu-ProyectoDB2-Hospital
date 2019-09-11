@@ -39,9 +39,9 @@ pipeline{
      }
     stage('Compile-Package'){
         //obtener el maven
-        steps{
+        
          def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
-
+        steps{
         sh "${mvnHome}/bin/mvn package"
         }
     }
