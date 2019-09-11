@@ -5,10 +5,10 @@ node{
     }
     stage('SYNC Git'){
        
-        sh 'git fetch --all
-            git checkout master
-            git checkout branch-name
-            git merge master'
+        sh 'git fetch --all'
+        sh 'git checkout master'
+            
+        sh 'git merge master'
     }
     stage('Compile-Package'){
         //obtener el maven
