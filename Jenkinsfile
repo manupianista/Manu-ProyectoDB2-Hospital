@@ -20,7 +20,17 @@ pipeline{
              }  
          }  
       
-     post {  
+     
+    stage('Compile-Package'){
+        //obtener el maven
+        
+         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
+        steps{
+        sh "${mvnHome}/bin/mvn package"
+        }
+    }
+
+    post {  
          always {  
              echo 'This will always run'  
          }  
@@ -37,14 +47,7 @@ pipeline{
              echo 'success?'
          }  
      }
-    stage('Compile-Package'){
-        //obtener el maven
-        
-         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
-        steps{
-        sh "${mvnHome}/bin/mvn package"
-        }
-    }
+
      }
      
     /*
