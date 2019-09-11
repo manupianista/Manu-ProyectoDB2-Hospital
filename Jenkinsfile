@@ -5,10 +5,8 @@ node{
     }
     stage('SYNC Git'){
        
-        sh 'git fetch --all'
-        sh 'git checkout master'
-        sh 'git fetch'           
-        sh 'git checkout manu'
+        sh 'git fetch --all'   
+
         sh 'git merge master'
     }
     stage('Compile-Package'){
