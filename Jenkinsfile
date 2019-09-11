@@ -1,7 +1,6 @@
 pipeline{
 
-    agent any  
-     stages { 
+    
 
     stage('SCM Checkout'){
        
@@ -26,7 +25,7 @@ pipeline{
 
                 sh "${mvnHome}/bin/mvn package"
             }
-     }  
+     
      
 
     
