@@ -19,7 +19,7 @@ node{
                  sh 'echo "Fail!"; exit 1'  
              }  
          }  
-      
+      /*
      post {  
          always {  
              echo 'This will always run'  
@@ -36,7 +36,7 @@ node{
          changed {  
              echo 'success?'
          }  
-     }
+     }*/
     stage('Compile-Package'){
         //obtener el maven
         steps{
