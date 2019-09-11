@@ -29,8 +29,7 @@ node{
         sh "${mvnHome}/bin/mvn package"
         }
     }
-     }
-     
+
     post {  
          always {  
              echo 'This will always run'  
@@ -48,4 +47,7 @@ node{
              echo 'success?'
          }  
      }
+     }
+     
+    
 }
