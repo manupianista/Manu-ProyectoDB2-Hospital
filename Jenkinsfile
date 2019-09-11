@@ -1,4 +1,4 @@
-pipeline{
+node{
     stage('SCM Checkout'){
        
         git 'https://github.com/miguelgonch/ProyectoDB2-Hospital.git'
