@@ -20,17 +20,7 @@ node{
              }  
          }  
       
-     
-    stage('Compile-Package'){
-        //obtener el maven
-        steps{
-         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
-
-        sh "${mvnHome}/bin/mvn package"
-        }
-    }
-
-    post {  
+     post {  
          always {  
              echo 'This will always run'  
          }  
@@ -47,7 +37,30 @@ node{
              echo 'success?'
          }  
      }
+    stage('Compile-Package'){
+        //obtener el maven
+        steps{
+         def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
+
+        sh "${mvnHome}/bin/mvn package"
+        }
+    }
      }
      
+    /*
+    agent any
     
+    stages {
+        stage('Ok') {
+            steps {
+                echo "Ok"
+            }
+        }
+    }
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
+*/
 }
