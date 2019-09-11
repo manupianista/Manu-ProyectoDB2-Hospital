@@ -29,7 +29,7 @@ pipeline {
         sh "${mvnHome}/bin/mvn package"
         }
     }
-
+/*dadas
     post {  
          always {  
              echo 'This will always run'  
@@ -46,7 +46,7 @@ pipeline {
          changed {  
              echo 'success?'
          }  
-     }
+     }*/
 
      }
      
