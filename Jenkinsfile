@@ -1,23 +1,25 @@
 node{
+    agent any  
+     stages {  
     stage('SCM Checkout'){
-       
+       steps{
         git 'https://github.com/miguelgonch/ProyectoDB2-Hospital.git'
+       }
     }
     stage('SYNC Git'){
-       
+       steps{
         sh 'git fetch --all'   
 
         sh 'git merge master'
+       }
     }
-    /*
-     agent any  
-     stages {  
+     
          stage('Test') {  
              steps {  
                  sh 'echo "Fail!"; exit 1'  
              }  
          }  
-     }  
+      
      post {  
          always {  
              echo 'This will always run'  
@@ -34,15 +36,16 @@ node{
          changed {  
              echo 'success?'
          }  
-     } */
-
+     }
     stage('Compile-Package'){
         //obtener el maven
+        steps{
          def mvnHome = tool name: 'Maven 3.6.2', type: 'maven'
 
         sh "${mvnHome}/bin/mvn package"
+        }
     }
- 
+     }
      
     /*
     agent any
