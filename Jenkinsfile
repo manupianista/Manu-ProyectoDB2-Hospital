@@ -9,6 +9,7 @@ pipeline{
 
         sh 'git merge master'
     }
+    /*
      agent any  
      stages {  
          stage('Test') {  
@@ -33,7 +34,7 @@ pipeline{
          changed {  
              echo 'success?'
          }  
-     } 
+     } */
 
     stage('Compile-Package'){
         //obtener el maven
