@@ -32,12 +32,12 @@ pipeline{
     }
     post {
         success {
-            emailext to: 'gonzalez161256@unis.edu.gt',
+            emailext to: 'castillo151148@unis.edu.gt',
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt',
+            emailext to: 'castillo151148@unis.edu.gt',
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
             body: "There was a problem with ${env.BUILD_URL}"
         }
