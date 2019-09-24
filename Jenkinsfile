@@ -4,16 +4,33 @@ pipeline {
 
         stage('############### REVISION DE CODIGO ##################') {
             steps {
-                
+                //
             }
         }
-
+        /*
         stage('############### CHECKOUT ##################') {
             steps {
                 checkout scm
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
+        }*/
+
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
+            }
         }
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('############### PKG ##################') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
 
         stage('############### GIT ##################') {
             steps {
@@ -24,7 +41,7 @@ pipeline {
         stage('############### MERGES ##################') {
         checkout([$class: 'GitSCM', branches: [[name: '*/master'], [name: '*/manu']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'PreBuildMerge', options: [mergeTarget: '*/master']]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '9b1c73a6-a6fd-4352-b020-f49031d51a26', url: 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git']]])
         }
-        
+
         stage('############### COMPILE ##################') {
             def mvnHome = tool name:'Maven 3.6.2', type: 'maven'
 
