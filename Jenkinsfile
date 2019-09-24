@@ -31,13 +31,13 @@ pipeline {
         }*/
 
 
-
+/*
         stage('############### GIT ##################') {
             steps {
                 sh 'git fetch --all'
                 sh 'git pull'
             }
-        }
+        }*/
 /*
         stage('############### COMPILE ##################') {
             def mvn_version = 'maven-3.6.2'
@@ -71,7 +71,7 @@ pipeline {
             }
         }*/
 
-    /*
+    
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
@@ -84,19 +84,8 @@ pipeline {
             } else if (env.BRANCH_NAME.startsWith("Production")) {
                 echo "Deploy hacia Production despues de build"
             }
-        }*/
-/*
-        stage('############### BUILD ##################') {
-            steps {
-                //
-            }
         }
 
-        stage('############### DEPLOY ##################') {
-            steps {
-
-            }
-        }*/
 
 
     } //fin stages
