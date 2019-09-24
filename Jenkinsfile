@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven'
-        jdk 'JDK-9'
+        //jdk 'JDK-9'
     }
 
     stages {
@@ -31,13 +31,13 @@ pipeline {
         }*/
 
 
-
+/*
         stage('############### GIT ##################') {
             steps {
                 sh 'git fetch --all'
                 sh 'git pull'
             }
-        }
+        }*/
 /*
         stage('############### COMPILE ##################') {
             def mvn_version = 'maven-3.6.2'
@@ -53,7 +53,7 @@ pipeline {
             }
         }
 
-        
+        /*
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
@@ -63,7 +63,7 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-        }
+        }*/
         /*
         stage('############### PKG ##################') {
             steps {
@@ -85,18 +85,7 @@ pipeline {
                 echo "Deploy hacia Production despues de build"
             }
         }*/
-/*
-        stage('############### BUILD ##################') {
-            steps {
-                //
-            }
-        }
 
-        stage('############### DEPLOY ##################') {
-            steps {
-
-            }
-        }*/
 
 
     } //fin stages
