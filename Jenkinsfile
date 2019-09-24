@@ -38,7 +38,9 @@ pipeline {
         
         stage ('############### Sonarqube ##################') {
             steps {
+                withSonarQubeEnv('sonar-scanner') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
+                }
             }
         }
 
@@ -88,12 +90,12 @@ pipeline {
         }
 
         
-        /*
-        stage('############### PKG ##################') {
+        
+        stage('############### DEPLOY ##################') {
             steps {
-                sh 'mvn package'
+                deploy adapters: [tomcat9(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: '**/*.war'
             }
-        }*/
+        }
 
     /*
         stage('############### DEPLOY AFTER ##################') {
