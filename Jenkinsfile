@@ -24,11 +24,6 @@ pipeline {
         }
 
         
-        stage('############### CLEAN ##################') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
         /*
         stage('############### TEST ##################') {
             steps {
@@ -83,7 +78,12 @@ pipeline {
                 sh "mvn clean package"    
             }
         }*/
-
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        
         stage ('############### BUILD ##################') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
