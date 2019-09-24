@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    enviroment {
+        doError = '1'
+    }
+
     tools {
         maven 'maven'
         jdk 'JDK-9'
@@ -101,20 +105,26 @@ pipeline {
             }
         }
 
-    /*
-        stage('############### DEPLOY AFTER ##################') {
-            echo 'branch name: ' + env.BRANCH_NAME
-
-            if(env.BRANCH_NAME.startsWith("Development")) {
-                echo "Deploy hacia dev despues de build"
-            } else if (env.BRANCH_NAME.startsWith("UAT")) {
-                echo "Deploy hacia UAT despues de build"
-            } else if (env.BRANCH_NAME.startsWith("QA")) {
-                echo "Deploy hacia QA despues de build"
-            } else if (env.BRANCH_NAME.startsWith("Production")) {
-                echo "Deploy hacia Production despues de build"
+        stage('Error') {
+            when {
+                expression { doError == '1' }
             }
-        }*/
+            steps {
+                echo "Failure"
+                error "failure test. It's work"
+            }
+        }
+        
+        stage('Success') {
+            when {
+                expression { doError == '0' }
+            }
+            steps {
+                echo "ok"
+            }
+        }
+
+    
 
 
 
@@ -132,3 +142,20 @@ pipeline {
     } //fin post
 
 } //fin pipeline
+
+
+
+/*
+        stage('############### DEPLOY AFTER ##################') {
+            echo 'branch name: ' + env.BRANCH_NAME
+
+            if(env.BRANCH_NAME.startsWith("Development")) {
+                echo "Deploy hacia dev despues de build"
+            } else if (env.BRANCH_NAME.startsWith("UAT")) {
+                echo "Deploy hacia UAT despues de build"
+            } else if (env.BRANCH_NAME.startsWith("QA")) {
+                echo "Deploy hacia QA despues de build"
+            } else if (env.BRANCH_NAME.startsWith("Production")) {
+                echo "Deploy hacia Production despues de build"
+            }
+        }*/
