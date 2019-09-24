@@ -11,8 +11,24 @@ pipeline {
         stage('############### CHECKOUT ##################') {
             steps {
                 checkout scm
+                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }
+
+        stage('############### GIT ##################') {
+            steps {
+                sh 'git fetch --all'
+            }
+        }
+
+        stage('############### COMPILE ##################') {
+            def mvnHome = tool name:'Maven 3.6.2', type: 'maven'
+
+            steps {
+                sh "${mvnHome}/bin/mvn package"    
+            }
+        }
+
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
