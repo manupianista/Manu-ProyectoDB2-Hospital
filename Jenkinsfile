@@ -1,12 +1,27 @@
 pipeline {
     agent any
+
+    tools {
+        maven 'Maven 3.6.2'
+        jdk 'jdk8'
+    }
+
     stages {
 
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+/*
         stage('############### REVISION DE CODIGO ##################') {
             steps {
                 //
             }
-        }
+        }*/
         /*
         stage('############### CHECKOUT ##################') {
             steps {
@@ -37,15 +52,22 @@ pipeline {
                 sh 'git fetch --all'
             }
         }
-
+/*
         stage('############### COMPILE ##################') {
             def mvn_version = 'maven-3.6.2'
             withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
             {
                 sh "mvn clean package"    
             }
+        }*/
+
+        stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+            }
         }
 
+    /*
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
@@ -58,7 +80,7 @@ pipeline {
             } else if (env.BRANCH_NAME.startsWith("Production")) {
                 echo "Deploy hacia Production despues de build"
             }
-        }
+        }*/
 /*
         stage('############### BUILD ##################') {
             steps {
