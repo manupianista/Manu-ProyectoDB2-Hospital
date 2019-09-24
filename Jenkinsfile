@@ -8,12 +8,36 @@ pipeline {
 
     stages {
 
-        stage ('Initialize') {
+        stage ('############### Initialize ##################') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
+            }
+        }
+
+        stage ('############### GIT STUFF ##################') {
+            steps {
+                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
+            }
+        }
+
+        
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    
+        stage ('###############Sonarqube##################') {
+            steps {
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
             }
         }
 /*
@@ -53,17 +77,7 @@ pipeline {
             }
         }
 
-        /*
-        stage('############### CLEAN ##################') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-        stage('############### TEST ##################') {
-            steps {
-                sh 'mvn test'
-            }
-        }*/
+        
         /*
         stage('############### PKG ##################') {
             steps {
