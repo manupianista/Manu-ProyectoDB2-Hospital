@@ -34,12 +34,22 @@ pipeline {
                 sh 'mvn test'
             }
         }
-    
-        stage ('###############Sonarqube##################') {
+
+        
+        stage ('############### Sonarqube ##################') {
             steps {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
             }
         }
+
+        stage("############### Quality Gate ##################") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+        }
+        
 /*
         stage('############### REVISION DE CODIGO ##################') {
             steps {
