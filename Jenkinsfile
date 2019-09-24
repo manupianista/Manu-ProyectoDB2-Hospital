@@ -14,7 +14,7 @@ pipeline {
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }*/
-
+/*
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh 'mvn package'
             }
-        }
+        }*/
 
 
         stage('############### GIT ##################') {
@@ -39,10 +39,10 @@ pipeline {
         }
 
         stage('############### COMPILE ##################') {
-            def mvnHome = tool name:'maven-3.6.2', type: 'maven'
-
-            steps {
-                sh "${mvnHome}/bin/mvn package"    
+            def mvn_version = 'maven-3.6.2'
+            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
+            {
+                sh "mvn clean package"    
             }
         }
 
