@@ -37,13 +37,9 @@ pipeline {
                 sh 'git fetch --all'
             }
         }
-        
-        stage('############### MERGES ##################') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master'], [name: '*/manu']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'PreBuildMerge', options: [mergeTarget: '*/master']]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '9b1c73a6-a6fd-4352-b020-f49031d51a26', url: 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git']]])
-        }
 
         stage('############### COMPILE ##################') {
-            def mvnHome = tool name:'Maven 3.6.2', type: 'maven'
+            def mvnHome = tool name:'maven-3.6.2', type: 'maven'
 
             steps {
                 sh "${mvnHome}/bin/mvn package"    
@@ -63,14 +59,8 @@ pipeline {
                 echo "Deploy hacia Production despues de build"
             }
         }
-
+/*
         stage('############### BUILD ##################') {
-            steps {
-                //
-            }
-        }
-
-        stage('############### TEST ##################') {
             steps {
                 //
             }
@@ -80,7 +70,7 @@ pipeline {
             steps {
 
             }
-        }
+        }*/
 
 
     } //fin stages
