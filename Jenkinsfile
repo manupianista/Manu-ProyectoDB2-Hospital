@@ -29,11 +29,12 @@ pipeline {
                 sh 'mvn clean'
             }
         }
+        /*
         stage('############### TEST ##################') {
             steps {
                 sh 'mvn test'
             }
-        }
+        }*/
 
         
         stage ('############### Sonarqube ##################') {
