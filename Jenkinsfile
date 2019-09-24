@@ -31,7 +31,7 @@ pipeline {
             }
         }*/
 
-        
+        /*
         stage ('############### Sonarqube ##################') {
             steps {
                 withSonarQubeEnv('sonar-scanner') {
@@ -49,7 +49,7 @@ pipeline {
               }
               }
             }
-        }
+        }*/
         
 /*
         stage('############### REVISION DE CODIGO ##################') {
