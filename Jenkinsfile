@@ -34,7 +34,7 @@ pipeline {
         
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonar-scanner') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
                 }
             }
@@ -43,7 +43,10 @@ pipeline {
         stage("############### Quality Gate ##################") {
             steps {
               timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
+                def qg = waitForQualityGate abortPipeline: true
+                if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
               }
             }
         }
@@ -117,5 +120,10 @@ pipeline {
 
     } //fin stages
 
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            }
+    } //fin post
 
 } //fin pipeline
