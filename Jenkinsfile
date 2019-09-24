@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven'
-        //jdk 'JDK-9'
+        jdk 'JDK-9'
     }
 
     stages {
@@ -29,7 +29,31 @@ pipeline {
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }*/
+
+
+
+        stage('############### GIT ##################') {
+            steps {
+                sh 'git fetch --all'
+                sh 'git pull'
+            }
+        }
 /*
+        stage('############### COMPILE ##################') {
+            def mvn_version = 'maven-3.6.2'
+            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
+            {
+                sh "mvn clean package"    
+            }
+        }*/
+
+        stage ('############### BUILD ##################') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+            }
+        }
+
+        
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
@@ -43,27 +67,6 @@ pipeline {
         stage('############### PKG ##################') {
             steps {
                 sh 'mvn package'
-            }
-        }*/
-
-
-        stage('############### GIT ##################') {
-            steps {
-                sh 'git fetch --all'
-            }
-        }
-/*
-        stage('############### COMPILE ##################') {
-            def mvn_version = 'maven-3.6.2'
-            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
-            {
-                sh "mvn clean package"    
-            }
-        }*/
-
-        stage ('Build') {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
         }
 
