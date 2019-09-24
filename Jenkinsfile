@@ -34,7 +34,7 @@ pipeline {
         
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('sonar-scanner') {
+                withSonarQubeEnv('sonar') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
                 }
             }
@@ -83,7 +83,7 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-        
+
         stage ('############### BUILD ##################') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
