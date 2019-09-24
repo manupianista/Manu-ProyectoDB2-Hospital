@@ -71,7 +71,7 @@ pipeline {
             }
         }*/
 
-    
+    /*
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
@@ -84,7 +84,7 @@ pipeline {
             } else if (env.BRANCH_NAME.startsWith("Production")) {
                 echo "Deploy hacia Production despues de build"
             }
-        }
+        }*/
 
 
 
