@@ -1,18 +1,73 @@
 pipeline {
     agent any
+
+    tools {
+        maven 'maven'
+        //jdk 'JDK-9'
+    }
+
     stages {
 
-        stage('############### REVISION DE CODIGO ##################') {
+        stage ('Initialize') {
             steps {
-                
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
         }
-
+/*
+        stage('############### REVISION DE CODIGO ##################') {
+            steps {
+                //
+            }
+        }*/
+        /*
         stage('############### CHECKOUT ##################') {
             steps {
                 checkout scm
+                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
+            }
+        }*/
+/*
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
             }
         }
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('############### PKG ##################') {
+            steps {
+                sh 'mvn package'
+            }
+        }*/
+
+
+        stage('############### GIT ##################') {
+            steps {
+                sh 'git fetch --all'
+            }
+        }
+/*
+        stage('############### COMPILE ##################') {
+            def mvn_version = 'maven-3.6.2'
+            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
+            {
+                sh "mvn clean package"    
+            }
+        }*/
+
+        stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+            }
+        }
+
+    /*
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
@@ -25,15 +80,9 @@ pipeline {
             } else if (env.BRANCH_NAME.startsWith("Production")) {
                 echo "Deploy hacia Production despues de build"
             }
-        }
-
+        }*/
+/*
         stage('############### BUILD ##################') {
-            steps {
-                //
-            }
-        }
-
-        stage('############### TEST ##################') {
             steps {
                 //
             }
@@ -43,7 +92,7 @@ pipeline {
             steps {
 
             }
-        }
+        }*/
 
 
     } //fin stages
