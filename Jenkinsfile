@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven'
-        jdk 'JDK-9'
+        //jdk 'JDK-9'
     }
 
     stages {
@@ -53,7 +53,7 @@ pipeline {
             }
         }
 
-        
+        /*
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
@@ -63,7 +63,7 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-        }
+        }*/
         /*
         stage('############### PKG ##################') {
             steps {
