@@ -64,11 +64,12 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        /*
         stage('############### PKG ##################') {
             steps {
                 sh 'mvn package'
             }
-        }
+        }*/
 
     /*
         stage('############### DEPLOY AFTER ##################') {
