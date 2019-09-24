@@ -46,13 +46,6 @@ pipeline {
                 //
             }
         }*/
-        /*
-        stage('############### CHECKOUT ##################') {
-            steps {
-                checkout scm
-                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
-            }
-        }*/
 
 
 /*
