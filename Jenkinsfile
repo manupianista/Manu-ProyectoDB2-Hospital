@@ -8,7 +8,7 @@ pipeline {
 
     stages {
 
-        stage ('Initialize') {
+        stage ('############### Initialize ##################') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -17,7 +17,25 @@ pipeline {
             }
         }
 
-        stage('Sonarqube') {
+        stage ('############### GIT STUFF ##################') {
+            steps {
+                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
+            }
+        }
+
+        
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage ('###############Sonarqube##################') {
             environment {
                 scannerHome = tool 'sonar-scanner'
             }
@@ -67,17 +85,7 @@ pipeline {
             }
         }
 
-        /*
-        stage('############### CLEAN ##################') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-        stage('############### TEST ##################') {
-            steps {
-                sh 'mvn test'
-            }
-        }*/
+        
         /*
         stage('############### PKG ##################') {
             steps {
