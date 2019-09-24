@@ -34,7 +34,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
+    /*
         stage ('###############Sonarqube##################') {
             environment {
                 scannerHome = tool 'sonar-scanner'
@@ -47,7 +47,7 @@ pipeline {
                 waitForQualityGate abortPipeline: true
             }
             }
-        }
+        }*/
 /*
         stage('############### REVISION DE CODIGO ##################') {
             steps {
