@@ -34,20 +34,12 @@ pipeline {
                 sh 'mvn test'
             }
         }
-    /*
+    
         stage ('###############Sonarqube##################') {
-            environment {
-                scannerHome = tool 'sonar-scanner'
-            }
             steps {
-                withSonarQubeEnv('sonarqube') {
-                sh "${scannerHome}/var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux"
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
             }
-            timeout(time: 10, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-            }
-            }
-        }*/
+        }
 /*
         stage('############### REVISION DE CODIGO ##################') {
             steps {
