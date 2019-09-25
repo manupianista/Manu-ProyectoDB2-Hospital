@@ -106,17 +106,3 @@ pipeline {
 
 
 
-/*
-        stage('############### DEPLOY AFTER ##################') {
-            echo 'branch name: ' + env.BRANCH_NAME
-
-            if(env.BRANCH_NAME.startsWith("Development")) {
-                echo "Deploy hacia dev despues de build"
-            } else if (env.BRANCH_NAME.startsWith("UAT")) {
-                echo "Deploy hacia UAT despues de build"
-            } else if (env.BRANCH_NAME.startsWith("QA")) {
-                echo "Deploy hacia QA despues de build"
-            } else if (env.BRANCH_NAME.startsWith("Production")) {
-                echo "Deploy hacia Production despues de build"
-            }
-        }*/
