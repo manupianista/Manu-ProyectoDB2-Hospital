@@ -69,7 +69,7 @@ pipeline {
         
         stage('############### DEPLOY ##################') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: 'target/proyectoDB2-Hospital1.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: 'target/*.war'
             }
         }
 
