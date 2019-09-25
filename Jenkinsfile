@@ -88,10 +88,7 @@ pipeline {
     post {
         always {
             echo 'I will always be here'
-            
-            mail to: 'castillo151148@unis.edu.gt',
-            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-            body: "${env.BUILD_URL} has result ${currentBuild.result}"
+            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT'
         }
         success {  
              echo 'This will run only if successful'  
