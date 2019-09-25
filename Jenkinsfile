@@ -82,7 +82,7 @@ pipeline {
 
     post {
         always {
-        mail to: 'bcl@nclasters.org',
+        mail to: 'castillo151148@unis.edu.gt',
             subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
             body: "${env.BUILD_URL} has result ${currentBuild.result}"
         }
