@@ -1,7 +1,5 @@
 pipeline {
-    enviroment {
-        doError = '1'
-    }
+    
     agent any
 
     
@@ -36,10 +34,10 @@ pipeline {
             }
         }*/
 
-        /*
+        
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('sonar-scanner') {
+                withSonarQubeEnv('Sonarqube') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
                 }
             }
@@ -54,7 +52,7 @@ pipeline {
               }
               }
             }
-        }*/
+        }
         
         /*
         stage('############### CHECKOUT ##################') {
@@ -85,24 +83,6 @@ pipeline {
             }
         }
 
-        stage('Error') {
-            when {
-                expression { doError == '1' }
-            }
-            steps {
-                echo "Failure"
-                error "failure test. It's work"
-            }
-        }
-        
-        stage('Success') {
-            when {
-                expression { doError == '0' }
-            }
-            steps {
-                echo "ok"
-            }
-        }
 
     
 
