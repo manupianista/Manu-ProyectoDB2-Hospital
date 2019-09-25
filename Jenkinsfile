@@ -1,9 +1,10 @@
 pipeline {
-    agent any
-
     enviroment {
         doError = '1'
     }
+    agent any
+
+    
 
     tools {
         maven 'maven'
@@ -55,12 +56,6 @@ pipeline {
             }
         }*/
         
-/*
-        stage('############### REVISION DE CODIGO ##################') {
-            steps {
-                //
-            }
-        }*/
         /*
         stage('############### CHECKOUT ##################') {
             steps {
@@ -70,21 +65,6 @@ pipeline {
         }*/
 
 
-/*
-        stage('############### GIT ##################') {
-            steps {
-                sh 'git fetch --all'
-                sh 'git pull'
-            }
-        }*/
-/*
-        stage('############### COMPILE ##################') {
-            def mvn_version = 'maven-3.6.2'
-            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
-            {
-                sh "mvn clean package"    
-            }
-        }*/
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
