@@ -88,13 +88,13 @@ pipeline {
     post {
         always {
             echo 'sending email'
-            emailext body: to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
+            emailext to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
             "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
         }
         success {  
              echo 'This will run only if successful'  
-             emailext body: to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
+             emailext to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
             "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
          }  
