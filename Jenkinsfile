@@ -1,5 +1,8 @@
 pipeline {
+    
     agent any
+
+    
 
     tools {
         maven 'maven'
@@ -8,7 +11,7 @@ pipeline {
 
     stages {
 
-        stage ('Initialize') {
+        stage ('############### Initialize ##################') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -16,36 +19,50 @@ pipeline {
                 '''
             }
         }
-/*
-        stage('############### REVISION DE CODIGO ##################') {
+
+        stage ('############### GIT STUFF ##################') {
             steps {
-                //
-            }
-        }*/
-        /*
-        stage('############### CHECKOUT ##################') {
-            steps {
-                checkout scm
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
+        }
+
+        
+        /*
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
         }*/
 
-
-
-        stage('############### GIT ##################') {
+        
+        stage ('############### Sonarqube ##################') {
             steps {
-                sh 'git fetch --all'
-                sh 'git pull'
+                withSonarQubeEnv('Sonarqube') {
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
+                }
             }
         }
-/*
-        stage('############### COMPILE ##################') {
-            def mvn_version = 'maven-3.6.2'
-            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
-            {
-                sh "mvn clean package"    
+
+
+    
+        stage("############### Quality Gate ##################") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                def qg = waitForQualityGate() 
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
+                
+              }
             }
-        }*/
+        }
+        
+        
+        stage('############### CLEAN ##################') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
 
         stage ('############### BUILD ##################') {
             steps {
@@ -54,23 +71,42 @@ pipeline {
         }
 
         
-        stage('############### CLEAN ##################') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-        stage('############### TEST ##################') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-        stage('############### PKG ##################') {
-            steps {
-                sh 'mvn package'
+        /*
+        stage('############### DEPLOY ##################') {
+          /*  steps {
+                deploy adapters: [tomcat9(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: '/*.war'
             }
         }
 
-    /*
+*/
+    
+
+
+
+    } //fin stages
+
+    post {
+        always {
+            echo 'I will always be here'
+            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+        }
+        success {  
+             echo 'This will run only if successful'  
+             mail to: 'castillo151148@unis.edu.gt',
+            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+            body: "${env.BUILD_URL} has result ${currentBuild.result}"
+         }  
+         failure {  
+            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+         }  
+         
+    } //fin post
+
+} //fin pipeline
+
+
+
+/*
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
 
@@ -84,21 +120,3 @@ pipeline {
                 echo "Deploy hacia Production despues de build"
             }
         }*/
-/*
-        stage('############### BUILD ##################') {
-            steps {
-                //
-            }
-        }
-
-        stage('############### DEPLOY ##################') {
-            steps {
-
-            }
-        }*/
-
-
-    } //fin stages
-
-
-} //fin pipeline
