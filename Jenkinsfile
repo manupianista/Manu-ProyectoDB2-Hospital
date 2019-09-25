@@ -87,17 +87,15 @@ pipeline {
 
     post {
         always {
-            echo 'I will always say Hello again!'
+            echo 'I will always be here'
             
-            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-        /*mail to: 'castillo151148@unis.edu.gt',
-            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-            body: "${env.BUILD_URL} has result ${currentBuild.result}"*/
+         mail bcc: '', body: "<b>Notification</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}",
+          cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";  
         }
         success {  
              echo 'This will run only if successful'  
+             mail bcc: '', body: "<b>Notification</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}",
+          cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          failure {  
              mail bcc: '', body: "<b>Fail</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";  
