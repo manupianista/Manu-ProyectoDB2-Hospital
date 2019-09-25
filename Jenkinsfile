@@ -87,17 +87,21 @@ pipeline {
 
     post {
         always {
-            echo 'I will always be here'
-            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+            echo 'sending email'
+            emailext body: to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
+            "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
         }
         success {  
              echo 'This will run only if successful'  
-             mail to: 'castillo151148@unis.edu.gt',
-            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-            body: "${env.BUILD_URL} has result ${currentBuild.result}"
+             emailext body: to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
+            "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
          }  
          failure {  
-            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+            emailext body: to: 'castillo151148@unis.edu.gt,jflores@unis.edu.gt',
+            "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
          }  
          
     } //fin post
