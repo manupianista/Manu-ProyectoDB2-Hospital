@@ -88,7 +88,7 @@ pipeline {
     post {
         always {
             echo 'I will always be here'
-            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT'
+            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
         }
         success {  
              echo 'This will run only if successful'  
