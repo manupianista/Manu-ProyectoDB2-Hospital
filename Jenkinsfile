@@ -37,13 +37,13 @@ pipeline {
         
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/login?from=%2F/sonar -Dsonar.host.url=http://192.168.69.4:9000'
                 }
             }
         }
 
-
+/*
     
         stage("############### Quality Gate ##################") {
             steps {
@@ -53,7 +53,7 @@ pipeline {
                 
               }
             }
-        }
+        }*/
         
         
         stage('############### CLEAN ##################') {
