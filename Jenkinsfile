@@ -69,12 +69,12 @@ pipeline {
         }
 
         
-        
-        stage('############### DEPLOY ##################') {
-            steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: '**/*.war'
-            }
-        }
+     
+     //   stage('############### DEPLOY ##################') {
+     //       steps {
+     //           deploy adapters: [tomcat8(credentialsId: 'tomcatcosa', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: '**/*.war'
+     //       }
+     //   }
 
 
     
@@ -82,24 +82,24 @@ pipeline {
 
 
     } //fin stages
-
+/*
     post {
         always {
             echo 'sending email'
             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, jflores@unis.edu.gt";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
         }
         success {  
              echo 'This will run only if successful'  
              mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, jflores@unis.edu.gt";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          failure {  
             emailtext bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, jflores@unis.edu.gt";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          
-    } //fin post
+    } */ //fin post
 
 } //fin pipeline
 
