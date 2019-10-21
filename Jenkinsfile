@@ -37,8 +37,8 @@ pipeline {
         
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('Sonarqube') {
-               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
+                withSonarQubeEnv('SonarQube') {
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/login?from=%2F/sonar -Dsonar.host.url=http://192.168.69.4:9000'
                 }
             }
         }
