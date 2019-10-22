@@ -1,4 +1,4 @@
-def GIT_EMAIL
+def GIT_EMAIL = ''
 pipeline {
     
     agent any
