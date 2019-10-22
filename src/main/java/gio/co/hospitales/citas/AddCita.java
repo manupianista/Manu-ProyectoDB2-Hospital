@@ -67,7 +67,7 @@ public class AddCita extends HttpServlet {
                     append(URLEncoder.encode("seg", "UTF-8")).append('=').append(URLEncoder.encode(seg, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restC/cita/addCita");
+            URL url = new URL("http://192.168.69.4:8888/proyectoDB2-Hospital1/restC/cita/addCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -85,14 +85,14 @@ public class AddCita extends HttpServlet {
             JSONObject obj = new JSONObject(response2.toString());
             int answ = obj.getInt("in");
             if (answ == 1) {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/citas_h.jsp?in=1");
             } else {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/citas_h.jsp?in=0");
             }
             wr.close();
             rd.close();
         } catch (Exception e) {
-            response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?err=1");
+            response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/citas_h.jsp?err=1");
             System.err.println(e);
         }
     }

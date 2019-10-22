@@ -24,8 +24,8 @@ $(document).ready(
         function () {
             $.ajax({
                 type: 'GET',
-                //url: 'http://localhost:8080/proyectoDB2-seguro/restHist/hist/getHist?hospital=2',
-                url: 'http://localhost:8080/proyectoDB2-Hospital1/GetHistSeg',
+                //url: 'http://192.168.69.4:8888/proyectoDB2-seguro/restHist/hist/getHist?hospital=2',
+                url: 'http://192.168.69.4:8888/proyectoDB2-Hospital1/GetHistSeg',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 

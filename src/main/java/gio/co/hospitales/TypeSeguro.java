@@ -29,7 +29,7 @@ public class TypeSeguro extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
 	// Generar jsons
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             //Obtener # del hospital
@@ -40,6 +40,9 @@ public class TypeSeguro extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
+            if(true) {
+                int i=0;
+            }
             try{
                 //var query sql
                 String sql;

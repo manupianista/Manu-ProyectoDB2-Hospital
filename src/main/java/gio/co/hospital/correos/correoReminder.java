@@ -104,7 +104,7 @@ public class correoReminder extends HttpServlet{
                     append(URLEncoder.encode("subcat", "UTF-8")).append('=').append(URLEncoder.encode(subcat, "UTF-8"));
                
                         // Send data
-              URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/sendEmailP");
+              URL url = new URL("http://192.168.69.4:8888/proyectoDB2-Hospital1/sendEmailP");
               HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
               conn2.setDoOutput(true);
               
@@ -127,7 +127,7 @@ public class correoReminder extends HttpServlet{
            
 
              } catch(SQLException e){
-                  //response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp");
+                  //response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/citas_h.jsp");
                      System.err.println(e);
                  }
     

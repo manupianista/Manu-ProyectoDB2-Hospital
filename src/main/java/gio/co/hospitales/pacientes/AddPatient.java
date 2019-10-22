@@ -76,7 +76,7 @@ public class AddPatient extends HttpServlet {
                     append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8")).append("&").
                     append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restP/patient/addPatient");
+            URL url = new URL("http://192.168.69.4:8888/proyectoDB2-Hospital1/restP/patient/addPatient");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -95,9 +95,9 @@ public class AddPatient extends HttpServlet {
             int answ = obj.getInt("in");
 
             if (answ == 1) {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?in=1");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/pacientes_h.jsp?in=1");
             } else {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?in=0");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/pacientes_h.jsp?in=0");
             }
             wr.close();
             rd.close();

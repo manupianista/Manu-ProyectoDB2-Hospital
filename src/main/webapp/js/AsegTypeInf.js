@@ -3,7 +3,7 @@ $(document).ready(
             
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospital1/TypeSeguro',
+                url: 'http://192.168.69.4:8888/proyectoDB2-Hospital1/TypeSeguro',
                 dataType: 'json',
                 success: function(data) {
                     var $pData = $('#typeAseg');

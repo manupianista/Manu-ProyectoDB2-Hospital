@@ -25,7 +25,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="http://localhost:8080/proyectoDB2-Hospital1/restU/usuarios/addUsuarios" method="post">
+                    <form class="form" action="http://192.168.69.4:8888/proyectoDB2-Hospital1/restU/usuarios/addUsuarios" method="post">
                         <!--<h4>Modificar <%=request.getParameter("username")%></h4>-->
                          <label>username: 
                             <input id="username" type="text" placeholder="Coloque el nuevo username del usuario" name="username" required>
