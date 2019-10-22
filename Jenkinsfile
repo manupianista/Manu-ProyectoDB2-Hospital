@@ -34,14 +34,14 @@ pipeline {
             }
         }*/
 
-        
+        /*
         stage ('############### Sonarqube ##################') {
             steps {
                 withSonarQubeEnv('sonarQube') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/sonarqube-webhook -Dsonar.host.url=http://192.168.69.4:9000'
                 }
             }
-        }
+        }*/
 
 /*
     
