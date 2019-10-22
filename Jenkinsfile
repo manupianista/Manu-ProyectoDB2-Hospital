@@ -26,9 +26,8 @@ pipeline {
 
         stage ('############### GIT STUFF ##################') {
             steps {
-                echo 'current commit'
-                echo commiterCommit
-                
+                echo "current commit ${commiterCommit}"
+
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }
