@@ -27,7 +27,7 @@ pipeline {
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
 
-                //elGIT_EMAIL = sh returnStdout: true, script: "git --no-pager show -s --format='%ce' $GIT_COMMIT"
+                //elGIT_EMAIL = (sh script: "git --no-pager show -s --format='%ce' $GIT_COMMIT", returnStdout: true)
                
             }
         }
