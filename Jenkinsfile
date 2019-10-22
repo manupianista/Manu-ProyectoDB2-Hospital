@@ -34,14 +34,14 @@ pipeline {
             }
         }*/
 
-        
+        /*
         stage ('############### Sonarqube ##################') {
             steps {
                 withSonarQubeEnv('sonarqubescanner') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/sonar -Dsonar.host.url=http://192.168.69.4:9000'
                 }
             }
-        }
+        }*/
 
 /*
     
@@ -70,7 +70,7 @@ pipeline {
 
         
      
-        stage('############### DEPLOY ##################') {
+        stage('############### TOMCAT DEPLOYMENT ##################') {
             steps {
                 //deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: '**/*.war'
                 sshagent(['tomcat']) {
