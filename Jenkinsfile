@@ -1,8 +1,12 @@
+def commiterName = GIT_COMMITTER_NAME
+def commiterEmail = GIT_COMMITTER_EMAIL 
+def commiterCommit = GIT_COMMIT 
+
+def previousSuccesfulCommit = GIT_PREVIOUS_SUCCESSFUL_COMMIT 
+
 pipeline {
     
     agent any
-
-    
 
     tools {
         maven 'mvn3'
@@ -22,20 +26,30 @@ pipeline {
 
         stage ('############### GIT STUFF ##################') {
             steps {
+                echo 'current commit'
+                echo commiterCommit
+                
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }
 
-        
-        /*
-        stage('############### TEST ##################') {
+        stage('############### MERGE BRANCHES ##################') {
+             when { expression { env.BRANCH_NAME != 'master' } }
             steps {
                 sh 'mvn test'
             }
-        }*/
+        }
+        
+        stage('############### TEST ##################') {
+             when { expression { env.BRANCH_NAME != 'master' } }
+            steps {
+                sh 'mvn test'
+            }
+        }
 
         
         stage ('############### Sonarqube ##################') {
+             when { expression { env.BRANCH_NAME != 'master' } }
             steps {
                 withSonarQubeEnv('sonarqubescanner') {
                sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/sonar -Dsonar.host.url=http://192.168.69.4:9000'
@@ -43,9 +57,10 @@ pipeline {
             }
         }
 
-/*
+
     
         stage("############### Quality Gate ##################") {
+             when { expression { env.BRANCH_NAME != 'master' } }
             steps {
               timeout(time: 1, unit: 'HOURS') {
                   waitForQualityGate abortPipeline: true
@@ -53,7 +68,7 @@ pipeline {
                 
               }
             }
-        }*/
+        }
         
         
         stage('############### CLEAN ##################') {
