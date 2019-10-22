@@ -83,7 +83,7 @@ pipeline {
 
 
     } //fin stages
-/*
+
     post {
         always {
             echo 'sending email'
@@ -100,7 +100,7 @@ pipeline {
               cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          
-    } */ //fin post
+    }  //fin post
 
 } //fin pipeline
 
