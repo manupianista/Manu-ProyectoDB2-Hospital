@@ -70,11 +70,14 @@ pipeline {
 
         
      
-     //   stage('############### DEPLOY ##################') {
-     //       steps {
-     //           deploy adapters: [tomcat8(credentialsId: 'tomcatcosa', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: '**/*.war'
-     //       }
-     //   }
+        stage('############### DEPLOY ##################') {
+            steps {
+                //deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: '**/*.war'
+                sshagent(['tomcat']) {
+                    sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat@192.168.69.4:8888'
+                }
+            }
+        }
 
 
     
