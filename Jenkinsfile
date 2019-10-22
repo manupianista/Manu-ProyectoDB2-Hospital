@@ -77,11 +77,6 @@ pipeline {
             }
         }
 
-        stage('################ PERFORMANCE TEST ###################') {
-            steps {
-                perfReport compareBuildPrevious: true, filterRegex: '', sourceDataFiles: ''
-            }
-        }
 
 
     
