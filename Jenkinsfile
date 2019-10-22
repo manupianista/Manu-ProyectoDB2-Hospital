@@ -21,6 +21,7 @@ pipeline {
         stage ('############### GIT STUFF ##################') {
             steps {
                 echo "current commit ${GIT_COMMIT}"
+                committerEmail = sh (script: 'git --no-pager show -s --format=\'%ae\'',returnStdout: true).trim()
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
@@ -77,7 +78,7 @@ pipeline {
         always {
             echo 'sending email'
             mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL} <br> Commit: ${GIT_COMMIT}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, manuelecastilloo@gmail.com";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
         }
         success {  
              echo 'Build Success email sending'  
