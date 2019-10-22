@@ -1,6 +1,6 @@
 /*def commiterName = %GIT_COMMITTER_NAME%
 def commiterEmail = %GIT_COMMITTER_EMAIL% */
-def commiterCommit = GIT_COMMIT
+def commiterCommit = ${GIT_COMMIT}
 
 //def previousSuccesfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT% 
 
