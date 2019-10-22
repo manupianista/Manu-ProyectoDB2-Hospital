@@ -22,12 +22,14 @@ pipeline {
             steps {
                 echo "current commit ${GIT_COMMIT}"
                 //GIT_EMAIL=$(git --no-pager show -s --format='%%ae' $GIT_COMMIT)
-                GIT_EMAIL = sh (
+               
+
+                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
+
+                 GIT_EMAIL = sh (
                     script: 'git --no-pager show -s --format=\'%ae\'',
                     returnStdout: true
                 ).trim()
-
-                git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }
         /*
