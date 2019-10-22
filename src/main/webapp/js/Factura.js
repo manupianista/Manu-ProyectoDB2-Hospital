@@ -12,7 +12,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospital1/restFac/factura/getFactura',
+                url: 'http://192.168.69.4:8888/proyectoDB2-Hospital1/restFac/factura/getFactura',
                 dataType: 'json',
                 data: { 
                     cId: query_string('cId') 

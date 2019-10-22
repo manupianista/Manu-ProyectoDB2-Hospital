@@ -5,7 +5,7 @@ pipeline {
     
 
     tools {
-        maven 'maven'
+        maven 'mvn3'
         jdk 'JDK-9'
     }
 
@@ -34,28 +34,26 @@ pipeline {
             }
         }*/
 
-        
+        /*
         stage ('############### Sonarqube ##################') {
             steps {
-                withSonarQubeEnv('Sonarqube') {
-               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
+                withSonarQubeEnv('sonarqubescanner') {
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/sonar -Dsonar.host.url=http://192.168.69.4:9000'
                 }
             }
-        }
+        }*/
 
-
+/*
     
         stage("############### Quality Gate ##################") {
             steps {
               timeout(time: 1, unit: 'HOURS') {
-                def qg = waitForQualityGate() 
-                    if (qg.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
+                  waitForQualityGate abortPipeline: true
+                
                 
               }
             }
-        }
+        }*/
         
         
         stage('############### CLEAN ##################') {
@@ -71,14 +69,15 @@ pipeline {
         }
 
         
-        /*
-        stage('############### DEPLOY ##################') {
-          /*  steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcatcosa', path: '', url: 'http://localhost:8888/')], contextPath: null, war: '/*.war'
+     
+        stage('############### TOMCAT DEPLOYMENT ##################') {
+            steps {
+                deploy adapters: [tomcat8(credentialsId: 'tomcat-dev', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: 'target/*.war'
+                
             }
         }
 
-*/
+
     
 
 
@@ -87,36 +86,23 @@ pipeline {
 
     post {
         always {
-            echo 'I will always be here'
-            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+            echo 'sending email'
+            mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
         }
         success {  
-             echo 'This will run only if successful'  
-             mail to: 'castillo151148@unis.edu.gt',
-            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-            body: "${env.BUILD_URL} has result ${currentBuild.result}"
+             echo 'Build Success email sending'  
+             mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build success: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          failure {  
-            emailext body: '$DEFAULT_CONTENT', recipientProviders: [brokenTestsSuspects(), brokenBuildSuspects(), developers()], subject: '$DEFAULT_SUBJECT', to: "castillo151148@unis.edu.gt"
+            emailtext bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build failure: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          
-    } //fin post
+    }  //fin post
 
 } //fin pipeline
 
+//
 
-
-/*
-        stage('############### DEPLOY AFTER ##################') {
-            echo 'branch name: ' + env.BRANCH_NAME
-
-            if(env.BRANCH_NAME.startsWith("Development")) {
-                echo "Deploy hacia dev despues de build"
-            } else if (env.BRANCH_NAME.startsWith("UAT")) {
-                echo "Deploy hacia UAT despues de build"
-            } else if (env.BRANCH_NAME.startsWith("QA")) {
-                echo "Deploy hacia QA despues de build"
-            } else if (env.BRANCH_NAME.startsWith("Production")) {
-                echo "Deploy hacia Production despues de build"
-            }
-        }*/

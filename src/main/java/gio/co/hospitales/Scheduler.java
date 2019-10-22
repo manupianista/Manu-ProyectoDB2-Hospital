@@ -162,8 +162,8 @@ public class Scheduler implements ServletContextListener {
         int res = 0;
         try {//b
             // Send data
-            String rStmt ="http://localhost:8080/proyectoDB2-seguro/restHist/hist/addHist?hospital="+hospitalNum+"&fecha="+fechaCita+"&doctor="+doctor+"&diagnostico="+diagnostico+"&resultados="+resultados+"&medicinas="+medicinas+"&pasos="+pasos+"&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita+"&nCliete="+pName+"&aCliente="+pLastName;
-            //String rStmt = "http://localhost:8080/proyectoDB2-seguro/restHist/hist/addHist?hospital=" + hospitalNum + "&fecha=" + fechaCita + "&doctor=" + doctor + "&diagnostico=" + diagnostico 
+            String rStmt ="http://192.168.69.4:8888/proyectoDB2-seguro/restHist/hist/addHist?hospital="+hospitalNum+"&fecha="+fechaCita+"&doctor="+doctor+"&diagnostico="+diagnostico+"&resultados="+resultados+"&medicinas="+medicinas+"&pasos="+pasos+"&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita+"&nCliete="+pName+"&aCliente="+pLastName;
+            //String rStmt = "http://192.168.69.4:8888/proyectoDB2-seguro/restHist/hist/addHist?hospital=" + hospitalNum + "&fecha=" + fechaCita + "&doctor=" + doctor + "&diagnostico=" + diagnostico 
             //        + "&resultados=" + resultados + "&medicinas=" + medicinas + "&pasos=" + pasos + "&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita;
             URL urlr = new URL(rStmt);
             HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
