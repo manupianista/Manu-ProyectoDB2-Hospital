@@ -42,9 +42,6 @@ pipeline {
                 }
             }
         }
-
-
-    
         stage("############### Quality Gate ##################") {
              when { expression { env.BRANCH_NAME != 'master' } }
             steps {
@@ -57,19 +54,13 @@ pipeline {
         }
         
         
-        stage('############### CLEAN ##################') {
+        stage('############### CLEAN & BUILD##################') {
             steps {
                 sh 'mvn clean'
-            }
-        }
-
-        stage ('############### BUILD ##################') {
-            steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
         }
-
-        
+     
      
         stage('############### TOMCAT DEPLOYMENT ##################') {
             steps {
@@ -78,13 +69,9 @@ pipeline {
             }
         }
 
-
-
-    
-
-
-
     } //fin stages
+
+
 
     post {
         always {
