@@ -21,7 +21,7 @@ pipeline {
         stage ('############### GIT STUFF ##################') {
             steps {
                 echo "current commit ${GIT_COMMIT}"
-                GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)
+                GIT_EMAIL=$(git --no-pager show -s --format='%%ae' $GIT_COMMIT)
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
