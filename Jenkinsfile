@@ -1,8 +1,8 @@
-def commiterName = GIT_COMMITTER_NAME
-def commiterEmail = GIT_COMMITTER_EMAIL 
-def commiterCommit = GIT_COMMIT 
+def commiterName = %GIT_COMMITTER_NAME%
+def commiterEmail = %GIT_COMMITTER_EMAIL% 
+def commiterCommit = %GIT_COMMIT% 
 
-def previousSuccesfulCommit = GIT_PREVIOUS_SUCCESSFUL_COMMIT 
+def previousSuccesfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT% 
 
 pipeline {
     
