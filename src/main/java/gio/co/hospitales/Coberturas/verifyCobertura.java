@@ -47,7 +47,7 @@ public class verifyCobertura extends HttpServlet {
             String dpi = request.getParameter("dpi");
             String servicio = request.getParameter("servicio");
             int hospital = hospitalNum;
-            url = "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/verify?dpi=" + dpi + "&servicio=" + servicio + "&hospital=" + hospital;
+            url = "http://192.168.69.4:8888/proyectoDB2-seguro/restAuth/auth/verify?dpi=" + dpi + "&servicio=" + servicio + "&hospital=" + hospital;
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             BufferedReader in = new BufferedReader(

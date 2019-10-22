@@ -53,7 +53,7 @@ public class DeletePatient extends HttpServlet {
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(URLEncoder.encode("delId", "UTF-8")).append('=').append(URLEncoder.encode(delId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restP/patient/deletePatient");
+            URL url = new URL("http://192.168.69.4:8888/proyectoDB2-Hospital1/restP/patient/deletePatient");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -72,9 +72,9 @@ public class DeletePatient extends HttpServlet {
             int answ = obj.getInt("del");
 
             if (answ == 1) {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?del=1");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/pacientes_h.jsp?del=1");
             } else {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?del=0");
+                response.sendRedirect("http://192.168.69.4:8888/proyectoDB2-Hospital1/pacientes_h.jsp?del=0");
             }
             wr.close();
             rd.close();
