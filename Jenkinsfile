@@ -1,9 +1,12 @@
 pipeline {
+    
     agent any
 
+    
+
     tools {
-        maven 'maven'
-        //jdk 'JDK-9'
+        maven 'mvn3'
+        jdk 'JDK-9'
     }
 
     stages {
@@ -24,45 +27,43 @@ pipeline {
         }
 
         
+        /*
+        stage('############### TEST ##################') {
+            steps {
+                sh 'mvn test'
+            }
+        }*/
+<<<<<<< HEAD
+=======
+
+        /*
+        stage ('############### Sonarqube ##################') {
+            steps {
+                withSonarQubeEnv('sonarqubescanner') {
+               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.69.4:9000/sonar -Dsonar.host.url=http://192.168.69.4:9000'
+                }
+            }
+        }*/
+>>>>>>> master
+
+/*
+    
+        stage("############### Quality Gate ##################") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                  waitForQualityGate abortPipeline: true
+                
+                
+              }
+            }
+        }*/
+        
+        
         stage('############### CLEAN ##################') {
             steps {
                 sh 'mvn clean'
             }
         }
-        stage('############### TEST ##################') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-    
-        stage ('###############Sonarqube##################') {
-            steps {
-               sh 'mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.18.0.1:9000/login?from=%2F/sonar -Dsonar.host.url=http://172.18.0.1:9000'
-            }
-        }
-/*
-        stage('############### REVISION DE CODIGO ##################') {
-            steps {
-                //
-            }
-        }*/
-
-
-/*
-        stage('############### GIT ##################') {
-            steps {
-                sh 'git fetch --all'
-                sh 'git pull'
-            }
-        }*/
-/*
-        stage('############### COMPILE ##################') {
-            def mvn_version = 'maven-3.6.2'
-            withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] )
-            {
-                sh "mvn clean package"    
-            }
-        }*/
 
         stage ('############### BUILD ##################') {
             steps {
@@ -71,31 +72,40 @@ pipeline {
         }
 
         
-        /*
-        stage('############### PKG ##################') {
+     
+        stage('############### TOMCAT DEPLOYMENT ##################') {
             steps {
-                sh 'mvn package'
+                deploy adapters: [tomcat8(credentialsId: 'tomcat-dev', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: 'target/*.war'
+                
             }
-        }*/
+        }
 
-    /*
-        stage('############### DEPLOY AFTER ##################') {
-            echo 'branch name: ' + env.BRANCH_NAME
 
-            if(env.BRANCH_NAME.startsWith("Development")) {
-                echo "Deploy hacia dev despues de build"
-            } else if (env.BRANCH_NAME.startsWith("UAT")) {
-                echo "Deploy hacia UAT despues de build"
-            } else if (env.BRANCH_NAME.startsWith("QA")) {
-                echo "Deploy hacia QA despues de build"
-            } else if (env.BRANCH_NAME.startsWith("Production")) {
-                echo "Deploy hacia Production despues de build"
-            }
-        }*/
+    
 
 
 
     } //fin stages
 
+    post {
+        always {
+            echo 'sending email'
+            mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
+        }
+        success {  
+             echo 'Build Success email sending'  
+             mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build success: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
+         }  
+         failure {  
+            emailtext bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL}",
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build failure: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
+         }  
+         
+    }  //fin post
 
 } //fin pipeline
+
+//
+

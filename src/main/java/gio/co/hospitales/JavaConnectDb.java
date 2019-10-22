@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class JavaConnectDb {
 
-    public static int hospNum = 3;
+    public static int hospNum = 1;
 
     public static int getHospNum() {
         return hospNum;
@@ -19,7 +19,7 @@ public class JavaConnectDb {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             switch (numHospital) {
                 case 1:
-                    conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521", "c##hospital1", "adminm");
+                    conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.69.4:1521/xe", "c##hospital1", "adminm");
                     break;
                 case 2:
                     //conexion del abue
@@ -31,7 +31,7 @@ public class JavaConnectDb {
                     break;
                 default:
                     //por defecto es al hospital 1
-                    conn = DriverManager.getConnection("jdbc:oracle:thin:@25.66.75.32:1521:XE", "c##hospital1", "adminm");
+                    conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.69.4:1521/XE", "c##hospital1", "adminm");
                     break;
             }
         } catch (Exception e) {
