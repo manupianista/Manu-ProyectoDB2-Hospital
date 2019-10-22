@@ -43,15 +43,15 @@ public class GetCita extends HttpServlet {
             String pardocId = request.getParameter("docId");
             if (((parPId != null) && !(parPId.equals("")))) {
                 int pId = Integer.parseInt(parPId);
-                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
+                url = "http://192.168.69.4:8888/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
             } else if (((parCitaId != null) && !(parCitaId.equals("")))) {
                 int citaId = Integer.parseInt(parCitaId);
-                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
+                url = "http://192.168.69.4:8888/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
             }else if (((pardocId != null) && !(pardocId.equals("")))) {
                 int docId = Integer.parseInt(pardocId);
-                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?docId=" + docId;
+                url = "http://192.168.69.4:8888/proyectoDB2-Hospital1/restC/cita/getCita?docId=" + docId;
             } else {
-                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita";
+                url = "http://192.168.69.4:8888/proyectoDB2-Hospital1/restC/cita/getCita";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();

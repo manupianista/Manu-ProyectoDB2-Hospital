@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledFuture;
                 public void run() { 
                     
                      try {
-                            String url1 = "http://localhost:8080/proyectoDB2-Hospital1/sendStuff";
+                            String url1 = "http://192.168.69.4:8888/proyectoDB2-Hospital1/sendStuff";
                                 URL urlr1 = new URL(url1);
                                 HttpURLConnection connr = (HttpURLConnection) urlr1.openConnection();
                                 connr.setRequestMethod("GET");

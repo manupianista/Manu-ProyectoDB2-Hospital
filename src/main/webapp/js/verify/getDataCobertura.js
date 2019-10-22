@@ -2,7 +2,7 @@ function getServicio(variable2)
 {
    $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/proyectoDB2-Hospital1/getServicios',
+        url: 'http://192.168.69.4:8888/proyectoDB2-Hospital1/getServicios',
         dataType: 'json',
         success: function(data) {
             for (var i = 0; i < data.length; i++) {
@@ -27,7 +27,7 @@ function query_string(variable)
 function checkCobertura(){
         $.ajax({                                                                                                    //Obtener el dpi del usuario
         type: 'GET',
-        url:'http://localhost:8080/proyectoDB2-Hospital1/restP/patient/getPatient',
+        url:'http://192.168.69.4:8888/proyectoDB2-Hospital1/restP/patient/getPatient',
         dataType: 'json',
         data: {
             pId: query_string('pId') 
@@ -36,7 +36,7 @@ function checkCobertura(){
             var $variable2 = getServicio(query_string('servicioId'));
             $.ajax({
                 type: 'GET',
-                url:'http://localhost:8080/proyectoDB2-Hospital1/GetCliente',
+                url:'http://192.168.69.4:8888/proyectoDB2-Hospital1/GetCliente',
                 dataType: 'json',
                 data: {
                     dpi: data[0].dpi 
@@ -52,7 +52,7 @@ function checkCobertura(){
             }); 
             $.ajax({
                 type: 'GET',
-                url:'http://localhost:8080/proyectoDB2-Hospital1/verifyCobertura',                      //Verificar si el seguro si cubre el servicio
+                url:'http://192.168.69.4:8888/proyectoDB2-Hospital1/verifyCobertura',                      //Verificar si el seguro si cubre el servicio
                 dataType: 'json',
                 data: {
                     dpi: data[0].dpi ,

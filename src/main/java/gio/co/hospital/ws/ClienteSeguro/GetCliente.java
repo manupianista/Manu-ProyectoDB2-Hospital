@@ -46,10 +46,10 @@ public class GetCliente extends HttpServlet {
             if ((parClienteId != null) && !(parClienteId.equals(""))) {
                 long cId = Long.parseLong(request.getParameter("dpi"));
                 url = "http://25.65.236.60:8080/proyectoDB2-seguro/restC/cliente/getCliente?dpi=" + cId;
-                //url = "http://localhost:8080/proyectoDB2-seguro/restC/cliente/getCliente?dpi=" + cId;
+                //url = "http://192.168.69.4:8888/proyectoDB2-seguro/restC/cliente/getCliente?dpi=" + cId;
             } else {
                 url = "http://25.65.236.60:8080/proyectoDB2-seguro/restC/cliente/getCliente/";
-                //url = "http://localhost:8080/proyectoDB2-seguro/restC/cliente/getCliente/";
+                //url = "http://192.168.69.4:8888/proyectoDB2-seguro/restC/cliente/getCliente/";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
