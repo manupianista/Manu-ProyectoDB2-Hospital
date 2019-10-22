@@ -33,8 +33,6 @@ pipeline {
                 sh 'mvn test'
             }
         }*/
-<<<<<<< HEAD
-=======
 
         /*
         stage ('############### Sonarqube ##################') {
@@ -44,7 +42,6 @@ pipeline {
                 }
             }
         }*/
->>>>>>> master
 
 /*
     
@@ -107,5 +104,4 @@ pipeline {
 
 } //fin pipeline
 
-//
 
