@@ -1,3 +1,4 @@
+def elGIT_EMAIL
 pipeline {
     
     agent any
@@ -21,8 +22,13 @@ pipeline {
         stage ('############### GIT STUFF ##################') {
             steps {
                 echo "current commit ${GIT_COMMIT}"
+                //GIT_EMAIL=$(git --no-pager show -s --format='%%ae' $GIT_COMMIT)
+               
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
+
+                //elGIT_EMAIL = (sh script: "git --no-pager show -s --format='%ce' $GIT_COMMIT", returnStdout: true)
+               
             }
         }
         /*
@@ -42,9 +48,6 @@ pipeline {
                 }
             }
         }
-
-
-    
         stage("############### Quality Gate ##################") {
              when { expression { env.BRANCH_NAME != 'master' } }
             steps {
@@ -57,49 +60,42 @@ pipeline {
         }
         
         
-        stage('############### CLEAN ##################') {
+        stage('############### CLEAN & BUILD##################') {
             steps {
                 sh 'mvn clean'
-            }
-        }
-
-        stage ('############### BUILD ##################') {
-            steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
         }
-
-        
+     
      
         stage('############### TOMCAT DEPLOYMENT ##################') {
+            when{
+                branch 'master'
+            }
             steps {
                 deploy adapters: [tomcat8(credentialsId: 'tomcat-dev', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: 'target/*.war'
-                
             }
+            
         }
 
-
-
-    
-
-
-
     } //fin stages
+
+
 
     post {
         always {
             echo 'sending email'
             mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL} <br> Commit: ${GIT_COMMIT}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, manuelecastilloo@gmail.com";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
         }
         success {  
              echo 'Build Success email sending'  
              mail bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL} <br> Commit: ${GIT_COMMIT}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build success: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, manuelecastilloo@gmail.com";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build success: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          failure {  
             emailtext bcc: '', body: "<b>Build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL} <br> Commit: ${GIT_COMMIT}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build failure: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt, manuelecastilloo@gmail.com";
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build failure: Project name -> ${env.JOB_NAME}", to: "castillo151148@unis.edu.gt";
          }  
          
     }  //fin post
