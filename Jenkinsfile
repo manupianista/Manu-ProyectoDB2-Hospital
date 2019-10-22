@@ -108,6 +108,7 @@ pipeline {
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 /*
         stage('############### DEPLOY AFTER ##################') {
             echo 'branch name: ' + env.BRANCH_NAME
@@ -124,3 +125,5 @@ pipeline {
         }*/
 =======
 >>>>>>> master
+=======
+>>>>>>> 92a707a5d35e38a0a8c37d0b239ba9483c85185c
