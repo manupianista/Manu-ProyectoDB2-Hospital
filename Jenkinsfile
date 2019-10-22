@@ -31,13 +31,13 @@ pipeline {
                
             }
         }
-        /*
+        
         stage('############### TEST ##################') {
              when { expression { env.BRANCH_NAME != 'master' } }
             steps {
                 sh 'mvn test'
             }
-        }*/
+        }
 
         
         stage ('############### Sonarqube ##################') {
