@@ -72,10 +72,11 @@ pipeline {
      
         stage('############### TOMCAT DEPLOYMENT ##################') {
             steps {
-                //deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: '**/*.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: 'target/*.war'
+                /*
                 sshagent(['tomcat']) {
                     sh 'scp -o StrictHostKeyChecking=no target/*.war tomcat@192.168.69.4:8888'
-                }
+                }*/
             }
         }
 
