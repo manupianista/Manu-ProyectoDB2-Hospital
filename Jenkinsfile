@@ -29,7 +29,7 @@ pipeline {
                  GIT_EMAIL = sh (
                     script: "git --no-pager show -s --format='%ae' $GIT_COMMIT",
                     returnStdout: true
-                ).trim()
+                )
             }
         }
         /*
