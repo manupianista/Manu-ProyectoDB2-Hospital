@@ -31,8 +31,8 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-        }
-*/
+        }*/
+
         
         stage ('############### Sonarqube ##################') {
              when { expression { env.BRANCH_NAME != 'master' } }
