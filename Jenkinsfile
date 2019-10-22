@@ -69,10 +69,13 @@ pipeline {
      
      
         stage('############### TOMCAT DEPLOYMENT ##################') {
+            when{
+                branch 'master'
+            }
             steps {
                 deploy adapters: [tomcat8(credentialsId: 'tomcat-dev', path: '', url: 'http://192.168.69.4:8888/')], contextPath: null, war: 'target/*.war'
-                
             }
+            
         }
 
     } //fin stages
