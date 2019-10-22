@@ -1,9 +1,3 @@
-/*def commiterName = %GIT_COMMITTER_NAME%
-def commiterEmail = %GIT_COMMITTER_EMAIL% */
-def commiterCommit = ${GIT_COMMIT}
-
-//def previousSuccesfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT% 
-
 pipeline {
     
     agent any
@@ -26,7 +20,7 @@ pipeline {
 
         stage ('############### GIT STUFF ##################') {
             steps {
-                echo "current commit ${commiterCommit}"
+                echo "current commit ${GIT_COMMIT}"
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
