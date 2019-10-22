@@ -1,4 +1,4 @@
-def GIT_EMAIL = ''
+def elGIT_EMAIL = ''
 pipeline {
     
     agent any
@@ -27,7 +27,7 @@ pipeline {
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
 
-                GIT_EMAIL = sh returnStdout: true, script: "git --no-pager show -s --format='%ae' $GIT_COMMIT"
+                elGIT_EMAIL = sh returnStdout: true, script: "git --no-pager show -s --format='%ae' $GIT_COMMIT"
                
             }
         }
