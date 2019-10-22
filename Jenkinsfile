@@ -25,20 +25,13 @@ pipeline {
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
         }
-
-        stage('############### MERGE BRANCHES ##################') {
-             when { expression { env.BRANCH_NAME != 'master' } }
-            steps {
-                sh 'mvn test'
-            }
-        }
-        
+        /*
         stage('############### TEST ##################') {
              when { expression { env.BRANCH_NAME != 'master' } }
             steps {
                 sh 'mvn test'
             }
-        }
+        }*/
 
         
         stage ('############### Sonarqube ##################') {
