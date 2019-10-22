@@ -21,9 +21,6 @@ pipeline {
         stage ('############### GIT STUFF ##################') {
             steps {
                 echo "current commit ${GIT_COMMIT}"
-                echo "current commit author ${GIT_COMMITTER_NAME}"
-                echo "current commit author email ${GIT_COMMITTER_EMAIL}"
-                echo "previous succesful commit ${GIT_PREVIOUS_SUCCESFUL_COMMIT}"
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
             }
