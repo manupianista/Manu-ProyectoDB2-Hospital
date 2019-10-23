@@ -22,13 +22,10 @@ pipeline {
         stage ('############### GIT STUFF ##################') {
             steps {
                 echo "current commit ${GIT_COMMIT}"
-                //GIT_EMAIL=$(git --no-pager show -s --format='%%ae' $GIT_COMMIT)
+               
                
 
                 git 'https://github.com/manupianista/Manu-ProyectoDB2-Hospital.git'
-
-                committerEmail = sh (script: 'git --no-pager show -s --format=\'%ae\'', returnStdout: true).trim()
-                //elGIT_EMAIL = (sh script: "git --no-pager show -s --format='%ce' $GIT_COMMIT", returnStdout: true)
                
             }
         }
@@ -87,7 +84,7 @@ pipeline {
         always {
             echo 'sending email'
             mail bcc: '', body: "<b>General build information</b><br>Project/branch: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build url: ${env.BUILD_URL} <br> Commit: ${GIT_COMMIT}",
-              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}", recipientProviders: [[$class: 'DevelopersRecipientProvider']], to: committerEmail;
+              cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Build: Project name -> ${env.JOB_NAME}",recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']], to: "castillo151148@unis.edu.gt";
         }
         success {  
              echo 'Build Success email sending'  
